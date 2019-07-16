@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rgEventSystem", "rgEventSystem\rgEventSystem.csproj", "{354E2127-9EE6-44A2-819D-51E2234E5AE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rgEventSystem_Test", "rgEventSystem_Test\rgEventSystem_Test.csproj", "{DECB4154-7C34-4FAD-908E-30EA7B564A1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{354E2127-9EE6-44A2-819D-51E2234E5AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{354E2127-9EE6-44A2-819D-51E2234E5AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{354E2127-9EE6-44A2-819D-51E2234E5AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{354E2127-9EE6-44A2-819D-51E2234E5AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DECB4154-7C34-4FAD-908E-30EA7B564A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DECB4154-7C34-4FAD-908E-30EA7B564A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DECB4154-7C34-4FAD-908E-30EA7B564A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DECB4154-7C34-4FAD-908E-30EA7B564A1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
