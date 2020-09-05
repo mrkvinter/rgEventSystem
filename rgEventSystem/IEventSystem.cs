@@ -10,7 +10,7 @@ namespace rgEventSystem
         void UnsubscribeAll<TEvent>()
             where TEvent : IEvent;
 
-        void Unsubscribe<TEvent>(Action<TEvent> eventObj)
+        void Unsubscribe<TEvent>(Action<TEvent> action)
             where TEvent : IEvent;
 
         void Notify<TEvent>(TEvent eventObj)

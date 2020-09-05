@@ -13,20 +13,19 @@ namespace rgEventSystem
             this.logger = logger;
         }
 
-        //todo-arseniy: кажется вместо List<object> можно хранить Action<TEvent>.
-        private readonly Dictionary<Type, List<object>> colleagues =
-            new Dictionary<Type, List<object>>();
+        private readonly Dictionary<Type, IEventHandler> colleagues =
+            new Dictionary<Type, IEventHandler>();
 
         public void Subscribe<TEvent>(Action<TEvent> handler) where TEvent : IEvent
         {
             var eventType = typeof(TEvent);
-            if (!colleagues.TryGetValue(eventType, out var list))
+            if (!colleagues.TryGetValue(eventType, out var eventHandler))
             {
-                list = new List<object>();
-                colleagues.Add(eventType, list);
+                eventHandler = new EventHandler<TEvent>();
+                colleagues.Add(eventType, eventHandler);
             }
 
-            list.Add(handler);
+            ((EventHandler<TEvent>)eventHandler).Add(handler);
         }
 
         public void UnsubscribeAll<TEvent>()
@@ -37,38 +36,22 @@ namespace rgEventSystem
                 colleagues.Remove(eventType);
         }
 
-        public void Unsubscribe<TEvent>(Action<TEvent> eventObj)
+        public void Unsubscribe<TEvent>(Action<TEvent> action)
             where TEvent : IEvent
         {
             var eventType = typeof(TEvent);
             if (colleagues.ContainsKey(eventType))
-                colleagues[eventType].Remove(eventObj);
+                ((EventHandler<TEvent>)colleagues[eventType]).Remove(action);
         }
 
         public void Notify<TEvent>(TEvent eventObj) where TEvent : IEvent
         {
             var eventType = typeof(TEvent);
             logger.Info($"{eventType.Name} happens.");
-            if (colleagues.TryGetValue(eventType, out var actions))
+            if (colleagues.TryGetValue(eventType, out var eventHandler))
             {
-                foreach (var action in actions)
-                {
-                    var handler = action as Action<TEvent>;
-                    if (handler == null)
-                    {
-                        logger.Error($"One of {eventType.Name} handlers is null.");
-                        continue;
-                    }
-
-                    try
-                    {
-                        handler.Invoke(eventObj);
-                    }
-                    catch (Exception e)
-                    {
-                        logger.Error(e);
-                    }
-                }
+                var concreteEventHandler = (EventHandler<TEvent>)eventHandler;
+                concreteEventHandler.CallEvent(eventObj);
             }
             else
             {
