@@ -1,5 +1,4 @@
 using System;
-using NUnit.Framework.Internal;
 
 namespace rgEventSystem_Test.Tools
 {
